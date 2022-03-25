@@ -10,7 +10,7 @@
 
 
 ## create issue
- - demonstrate late...
+ - demonstrate later...
 
 ## create new feature branch
   1. `$ git checkout -b <feature>`
