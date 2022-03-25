@@ -10,7 +10,7 @@ create local develop branch with following commands
 4. `$ git pull https://github.com/YIshihara11201/Pexeso.git`
 
 ## create issue
-画像を貼る
+
 
 ## create new feature branch
 1. `$ git checkout -b <feature>`
@@ -26,7 +26,9 @@ stage, and commit with following commands
 ## pull request
 Make sure your branch is the feature branch, with command
 1. `$ git branch -a`
+
 if you are in other branch, switch to the feature branch, with command
+
 1. `$ git switch <feature>`
 
 Push your feature branch remote develop repository, with command
