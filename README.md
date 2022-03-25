@@ -8,11 +8,12 @@ create local develop branch with following commands
 2. `cd <work directory>`
 3. `git init`
 4. `$ git pull https://github.com/YIshihara11201/Pexeso.git`
-checkout to your feature repository
-5. `$ git checkout -b <feature>`
 
 ## create issue
 画像を貼る
+
+## create new feature branch
+1. `$ git checkout -b <feature>`
 
 ## implement feature
 coding, coding, coding
