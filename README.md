@@ -6,8 +6,8 @@ We will follow github flow strategy
 create local develop branch with following commands
 1. `mkdir <work directory>`
 2. `cd <work directory>`
-3. `git init`
-4. `$ git pull https://github.com/YIshihara11201/Pexeso.git`
+3. `git clone https://github.com/YIshihara11201/Pexeso.git`
+
 
 ## create issue
 
@@ -15,13 +15,16 @@ create local develop branch with following commands
 ## create new feature branch
 1. `$ git checkout -b <feature>`
 
+
 ## implement feature
 coding, coding, coding
+
 
 ## commit changes
 stage, and commit with following commands
 1. `$ git add .`
 2. `$ git commit -m <message> .`
+
 
 ## pull request
 Make sure your branch is the feature branch, with command
