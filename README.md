@@ -35,6 +35,7 @@
   1. `$ git switch <feature>`
 
 - Push your feature branch remote develop repository, with command
+
 `$ git push -u origin <feature>`
 
 - Pull Request from GitHub
