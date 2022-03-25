@@ -36,7 +36,7 @@
 
 - Push your feature branch remote develop repository, with command
 
-`$ git push -u origin <feature>`
+1. `$ git push -u origin <feature>`
 
 - Pull Request from GitHub
 
