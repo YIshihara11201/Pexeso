@@ -79,10 +79,6 @@ public class Game {
     this.turn = turn;
   }
 
-  public Card[] getDrawCards() {
-    return drawCards;
-  }
-
   private void createDeck(Card[] card) {
     this.deck = new ArrayList<>(List.of(cards));
   }
@@ -110,7 +106,7 @@ public class Game {
 
         // add point for player
         players[getTurn()].getPoints().add(drawCards[0]);
-        // remove paired card
+        // remove paired card after point added
         deck.remove(drawCards[0]);
         deck.remove(drawCards[1]);
         // reset draw cards
