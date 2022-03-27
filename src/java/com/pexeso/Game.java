@@ -1,6 +1,7 @@
 package com.pexeso;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,6 +53,7 @@ public class Game {
   private Player[] players;
   private int turn;
   private Card[] drawCards = new Card[2];
+  private ArrayList<String> pairPatterns = new ArrayList<>();
 
   public Game(Player[] players) {
     createDeck(cards);
@@ -79,8 +81,8 @@ public class Game {
     this.turn = turn;
   }
 
-  public Card[] getDrawCards() {
-    return drawCards;
+  public ArrayList<String> getPairPatterns() {
+    return pairPatterns;
   }
 
   private void createDeck(Card[] card) {
@@ -105,23 +107,29 @@ public class Game {
     }else if(drawCards[1]==null){  // 2nd draw
       drawCards[1] = findCard(clickedCardPattern);
       // check if pair was made
+      // success
       if(drawCards[0].getPattern().equals(drawCards[1].getPattern())){
         String pairCardPattern = drawCards[0].getPattern();
+        // retain pair pattern until fail
+        pairPatterns.add(pairCardPattern);
 
         // add point for player
         players[getTurn()].getPoints().add(drawCards[0]);
-        // remove paired card
+
+        // remove paired card after point added
         deck.remove(drawCards[0]);
         deck.remove(drawCards[1]);
-        // reset draw cards
+
+        // reset cards drew
         drawCards[0]=null;
         drawCards[1]=null;
 
         return pairCardPattern;
       }else {
-        // reset draw cards
+        // reset cards drew
         drawCards[0]=null;
         drawCards[1]=null;
+
         // switch to next player turn
         setTurn((getTurn()+1)%players.length);
 
@@ -129,7 +137,7 @@ public class Game {
       }
     }
     // for 1st draw
-    return null;
+    return "first-draw";
   }
 
 }
