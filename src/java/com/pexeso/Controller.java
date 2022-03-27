@@ -52,15 +52,17 @@ public class Controller implements Initializable {
 
           // check if pair was made
           String pairCardPattern = game.checkPair(actionEvent);
-          if(pairCardPattern == "fail"){ // fail making pair
+          System.out.println(pairCardPattern);
+          ArrayList<String> pairedPatterns = game.getPairPatterns();
+          if(pairCardPattern.equals("fail")){ // fail making pair
+            if(game.getPairPatterns().size()!=0){ // when failed after second try
+              removeCardByPatterns(pairedPatterns);
+            }
             turnBackAllCards(game);
             switchTurnTitle(game);
-          } else if(pairCardPattern != null){ // pair made
-            // remove the paired cards
-            removeCardByPattern(pairCardPattern);
-            if(game.getDeck().size()==0){
-              displayResult(game);
-            }
+          } else if(game.getDeck().size()==0){ // game end
+            removeCardByPatterns(pairedPatterns);
+            displayResult(game);
           }
         }
       });
@@ -78,26 +80,33 @@ public class Controller implements Initializable {
     label.setText(game.getPlayers()[game.getTurn()].getName() + "'s turn");
   }
 
-  private void removeCardByPattern(String pattern) {
+  private void removeCardByPatterns(ArrayList<String> patterns) {
     ObservableList<Node> children = gridlayout.getChildren();
-    int removeCount=0;
-    for(int i=0; i<children.size(); i++){
-      if(children.get(i) instanceof Button && ((Button) children.get(i)).getText().equals(pattern)) {
-        children.remove(children.get(i));
+    for (String pattern : patterns) {
+      int removeCount = 0;
+      for (int j = 0; j < children.size(); j++) {
+        if (children.get(j) instanceof Button && ((Button) children.get(j)).getText()
+            .equals(pattern)) {
+          children.remove(children.get(j));
 
-        // add invisible cards to keep space for the removed pair
-        Button blankSpace = new Button();
-        blankSpace.getStyleClass().add("transparent-card");
-        blankSpace.setDisable(true);
-        GridPane.setRowIndex(blankSpace, (int) i/ROW+1);
-        GridPane.setColumnIndex(blankSpace, i%ROW);
-        gridlayout.getChildren().add(i,blankSpace);
+          // add invisible cards to keep space for the removed pair
+          Button blankSpace = new Button();
+          blankSpace.getStyleClass().add("transparent-card");
+          blankSpace.setId("blank");
+          blankSpace.setDisable(true);
+          GridPane.setRowIndex(blankSpace, (int) j / ROW + 1);
+          GridPane.setColumnIndex(blankSpace, j % ROW);
+          gridlayout.getChildren().add(j, blankSpace);
 
-        removeCount++;
-        if(removeCount==2) break;
-        i--;
+          removeCount++;
+          if (removeCount == 2)
+            break;
+          j--;
+        }
       }
     }
+
+    patterns.clear();
   }
 
   private void turnBackAllCards(Game game) {
@@ -107,7 +116,7 @@ public class Controller implements Initializable {
       Card currentCard = deck.get(i);
       if(currentCard.isFront()){
         for(Node node: cardNodes){
-          if(node.getId().equals(currentCard.getCardId())){
+          if(!node.getId().equals("blank") && node.getId().equals(currentCard.getCardId())){
             currentCard.flip(node);
           }
         }
