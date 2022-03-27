@@ -1,0 +1,27 @@
+.transparent-card {
+    -fx-font: 20px "Serif";
+    -fx-alignment: center ;
+    -fx-padding: 5px;
+    -fx-pref-height: 100px;
+    -fx-pref-width: 100px;
+    -fx-background-color: transparent;
+}
+
+.card-front {
+    -fx-font: 20px "Serif";
+    -fx-alignment: center ;
+    -fx-padding: 5px;
+    -fx-pref-height: 100px;
+    -fx-pref-width: 100px;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}
+
+.card-back {
+    -fx-font: 20px "Serif";
+    -fx-alignment: center ;
+    -fx-padding: 5px;
+    -fx-pref-height: 100px;
+    -fx-pref-width: 100px;
+    -fx-background-color: lightblue;
+}
