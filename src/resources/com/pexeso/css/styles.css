@@ -1,27 +1,27 @@
 .transparent-card {
-    -fx-font: 20px "Serif";
-    -fx-alignment: center ;
-    -fx-padding: 5px;
     -fx-pref-height: 100px;
     -fx-pref-width: 100px;
+    -fx-padding: 0;
+    -fx-margin: 0;
+    -fx-alignment: center ;
     -fx-background-color: transparent;
 }
 
 .card-front {
-    -fx-font: 20px "Serif";
-    -fx-alignment: center ;
-    -fx-padding: 5px;
+    -fx-background-size: 100px 100px;
     -fx-pref-height: 100px;
     -fx-pref-width: 100px;
-    -fx-background-color: black;
-    -fx-text-fill: white;
+    -fx-padding: 0;
+    -fx-margin: 0;
+    -fx-alignment: center;
 }
 
 .card-back {
-    -fx-font: 20px "Serif";
-    -fx-alignment: center ;
-    -fx-padding: 5px;
+    -fx-background-image: url("../pictures/back.jpg");
+    -fx-background-size: 100px 100px;
     -fx-pref-height: 100px;
     -fx-pref-width: 100px;
-    -fx-background-color: lightblue;
+    -fx-padding: 0;
+    -fx-margin: 0;
+    -fx-alignment: center ;
 }

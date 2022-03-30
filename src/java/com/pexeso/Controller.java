@@ -21,8 +21,7 @@ public class Controller implements Initializable {
   @FXML
   private GridPane gridlayout;
 
-  private static final int CARD_PAIR = 15;
-  private static final int ROW = 5;
+  private static final double COL = 5;
 
   Player[] players = {
       new Player("Cybill"),
@@ -38,6 +37,7 @@ public class Controller implements Initializable {
     Label turnLabel = new Label();
     turnLabel.setText(players[game.getTurn()].getName()+"'s turn");
     turnLabel.setId("turn");
+    GridPane.setRowIndex(turnLabel, 0);
     gridlayout.getChildren().add(turnLabel);
 
     // set cards on the field
@@ -52,7 +52,6 @@ public class Controller implements Initializable {
 
           // check if pair was made
           String pairCardPattern = game.checkPair(actionEvent);
-          System.out.println(pairCardPattern);
           ArrayList<String> pairedPatterns = game.getPairPatterns();
           if(pairCardPattern.equals("fail")){ // fail making pair
             if(game.getPairPatterns().size()!=0){ // when failed after second try
@@ -69,8 +68,8 @@ public class Controller implements Initializable {
 
       // set card FXML inside GridPane (parent grid)
       // shift 1 row for placing player's turn label
-      GridPane.setRowIndex(currentCard.getCardFXML(), (int) i/ROW+1);
-      GridPane.setColumnIndex(currentCard.getCardFXML(), i%ROW);
+      GridPane.setRowIndex(currentCard.getCardFXML(), (int) (1+ i/COL));
+      GridPane.setColumnIndex(currentCard.getCardFXML(), (int)(i%COL));
       gridlayout.getChildren().add(currentCard.getCardFXML());
     }
   }
@@ -84,9 +83,9 @@ public class Controller implements Initializable {
     ObservableList<Node> children = gridlayout.getChildren();
     for (String pattern : patterns) {
       int removeCount = 0;
-      for (int j = 0; j < children.size(); j++) {
-        if (children.get(j) instanceof Button && ((Button) children.get(j)).getText()
-            .equals(pattern)) {
+      for (int j = 1; j < children.size(); j++) {
+        if (children.get(j) instanceof Button
+            && ((Button) children.get(j)).getText().equals(pattern)) {
           children.remove(children.get(j));
 
           // add invisible cards to keep space for the removed pair
@@ -94,10 +93,9 @@ public class Controller implements Initializable {
           blankSpace.getStyleClass().add("transparent-card");
           blankSpace.setId("blank");
           blankSpace.setDisable(true);
-          GridPane.setRowIndex(blankSpace, (int) j / ROW + 1);
-          GridPane.setColumnIndex(blankSpace, j % ROW);
+          GridPane.setRowIndex(blankSpace, (int)Math.ceil(j/COL));
+          GridPane.setColumnIndex(blankSpace, (int)((j-1)%COL));
           gridlayout.getChildren().add(j, blankSpace);
-
           removeCount++;
           if (removeCount == 2)
             break;
@@ -105,7 +103,6 @@ public class Controller implements Initializable {
         }
       }
     }
-
     patterns.clear();
   }
 

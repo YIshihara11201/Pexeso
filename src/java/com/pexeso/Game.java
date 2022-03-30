@@ -13,41 +13,37 @@ public class Game {
   private static final int CARD_PAIR = 15;
   private static final int CARD_NUMBER = 2*CARD_PAIR;
   private static final Card[] cards = {
-      new Card("1", "text1"),
-      new Card("2", "text1"),
-      new Card("3", "text2"),
-      new Card("4", "text2"),
-      new Card("5", "text3"),
-      new Card("6", "text3"),
-      new Card("7", "text4"),
-      new Card("8", "text4"),
-      new Card("9", "text5"),
-      new Card("10", "text5"),
-      new Card("11", "text6"),
-      new Card("12", "text6"),
-      new Card("13", "text7"),
-      new Card("14", "text7"),
-      new Card("15", "text8"),
-      new Card("16", "text8"),
-      new Card("17", "text9"),
-      new Card("18", "text9"),
-      new Card("19", "text10"),
-      new Card("20", "text10"),
-      new Card("21", "text11"),
-      new Card("22", "text11"),
-      new Card("23", "text12"),
-      new Card("24", "text12"),
-      new Card("25", "text13"),
-      new Card("26", "text13"),
-      new Card("27", "text14"),
-      new Card("28", "text14"),
-      new Card("29", "text15"),
-      new Card("30", "text15"),
-
+      new Card("1", "/com/pexeso/pictures/1.jpg"),
+      new Card("2", "/com/pexeso/pictures/1.jpg"),
+      new Card("3", "/com/pexeso/pictures/2.jpg"),
+      new Card("4", "/com/pexeso/pictures/2.jpg"),
+      new Card("5", "/com/pexeso/pictures/3.jpg"),
+      new Card("6", "/com/pexeso/pictures/3.jpg"),
+      new Card("7", "/com/pexeso/pictures/4.jpg"),
+      new Card("8", "/com/pexeso/pictures/4.jpg"),
+      new Card("9", "/com/pexeso/pictures/5.jpg"),
+      new Card("10", "/com/pexeso/pictures/5.jpg"),
+      new Card("11", "/com/pexeso/pictures/6.jpg"),
+      new Card("12", "/com/pexeso/pictures/6.jpg"),
+      new Card("13", "/com/pexeso/pictures/7.jpg"),
+      new Card("14", "/com/pexeso/pictures/7.jpg"),
+      new Card("15", "/com/pexeso/pictures/8.jpg"),
+      new Card("16", "/com/pexeso/pictures/8.jpg"),
+      new Card("17", "/com/pexeso/pictures/9.jpg"),
+      new Card("18", "/com/pexeso/pictures/9.jpg"),
+      new Card("19", "/com/pexeso/pictures/10.jpg"),
+      new Card("20", "/com/pexeso/pictures/10.jpg"),
+      new Card("21", "/com/pexeso/pictures/11.jpg"),
+      new Card("22", "/com/pexeso/pictures/11.jpg"),
+      new Card("23", "/com/pexeso/pictures/12.jpg"),
+      new Card("24", "/com/pexeso/pictures/12.jpg"),
+      new Card("25", "/com/pexeso/pictures/13.jpg"),
+      new Card("26", "/com/pexeso/pictures/13.jpg"),
+      new Card("27", "/com/pexeso/pictures/14.jpg"),
+      new Card("28", "/com/pexeso/pictures/14.jpg"),
+      new Card("29", "/com/pexeso/pictures/15.jpg"),
+      new Card("30", "/com/pexeso/pictures/15.jpg"),
   };
-
-  @FXML
-  private GridPane gridlayout;
 
   private ArrayList<Card> deck;
   private Player[] players;
@@ -108,8 +104,8 @@ public class Game {
       drawCards[1] = findCard(clickedCardPattern);
       // check if pair was made
       // success
-      if(drawCards[0].getPattern().equals(drawCards[1].getPattern())){
-        String pairCardPattern = drawCards[0].getPattern();
+      if(drawCards[0].getFrontPattern().equals(drawCards[1].getFrontPattern())){
+        String pairCardPattern = drawCards[0].getFrontPattern();
         // retain pair pattern until fail
         pairPatterns.add(pairCardPattern);
 
