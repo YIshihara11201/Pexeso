@@ -2,24 +2,27 @@ package com.pexeso;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.text.Font;
 
 public class Card {
+
   private String cardId;
-  private String pattern;
+  private String frontPattern;
   private boolean isFront;
 
   private Button cardFXML;
 
-  public Card(String cardId, String pattern){
+  public Card(String cardId, String frontPattern){
     setCardId(cardId);
-    setPattern(pattern);
+    setFrontPattern(frontPattern);
     setFront(false);
 
     // FXML setting
     Button card = new Button();
     card.getStyleClass().add("card-back");
     card.setId(cardId);
-    card.setText(pattern);
+    card.setText(frontPattern);
+    card.setFont(new Font(0));
     setCardFXML(card);
   }
 
@@ -39,12 +42,12 @@ public class Card {
     this.cardId = cardId;
   }
 
-  public String getPattern() {
-    return pattern;
+  public String getFrontPattern() {
+    return frontPattern;
   }
 
-  private void setPattern(String pattern) {
-    this.pattern = pattern;
+  public void setFrontPattern(String frontPattern) {
+    this.frontPattern = frontPattern;
   }
 
   public boolean isFront() {
@@ -60,6 +63,7 @@ public class Card {
     // implement flipping animation
     if(isFront()){
       setFront(false);
+      node.setStyle(null);
       node.getStyleClass().clear();
       node.getStyleClass().add("card-back");
       node.setDisable(false);
@@ -67,6 +71,8 @@ public class Card {
       setFront(true);
       node.getStyleClass().clear();
       node.getStyleClass().add("card-front");
+      node.setStyle("-fx-background-image: url(" + getClass().getResource(getFrontPattern())
+          .toExternalForm() + ")");
       node.setDisable(true);
     }
   }
