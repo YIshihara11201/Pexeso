@@ -56,21 +56,30 @@ public class Controller implements Initializable {
           String pairCardPattern = game.checkPair(actionEvent);
           ArrayList<String> pairedPatterns = game.getPairPatterns();
           if(pairCardPattern.equals("fail")){ // fail making pair
+
+            // delay timing for turning back failed pair
+            // https://java.tutorialink.com/how-do-i-put-something-on-an-fx-thread
+            // https://stackoverflow.com/questions/21083945/how-to-avoid-not-on-fx-application-thread-currentthread-javafx-application-th
+            // https://www.demo2s.com/java/javafx-platform-runlater-runnable-runnable.html
+            // https://www.bold.ne.jp/engineer-club/java-thread
+            gridlayout.getChildren().forEach(node->{
+              if(!(node instanceof Label)){
+                node.setDisable(true);
+              }
+            });
+
+            TimerTask turnBack = new TimerTask() {
+              public void run() {
+                Platform.runLater(()-> {
+                  turnBackAllCards(game);
+                });
+              }
+            };
+            Timer timer = new Timer();
+            timer.schedule(turnBack, 2000);
+
             if(game.getPairPatterns().size()!=0){ // when failed after second try
 
-              // delay timing for turning back failed pair
-              // https://java.tutorialink.com/how-do-i-put-something-on-an-fx-thread
-              // https://stackoverflow.com/questions/21083945/how-to-avoid-not-on-fx-application-thread-currentthread-javafx-application-th
-              // https://www.demo2s.com/java/javafx-platform-runlater-runnable-runnable.html
-              // https://www.bold.ne.jp/engineer-club/java-thread
-
-              TimerTask turnBack = new TimerTask() {
-                public void run() {
-                  Platform.runLater(()-> {
-                    turnBackAllCards(game);
-                  });
-                }
-              };
               TimerTask remove = new TimerTask() {
                 public void run() {
                   Platform.runLater(()-> {
@@ -78,12 +87,19 @@ public class Controller implements Initializable {
                   });
                 }
               };
-              Timer timer = new Timer();
-              timer.schedule(turnBack, 2000);
               timer.schedule(remove, 3000);
-
             }
 
+            TimerTask enableCells = new TimerTask() {
+              public void run() {
+                Platform.runLater(()-> {
+                  gridlayout.getChildren().forEach(node->{
+                    node.setDisable(false);
+                  });
+                });
+              }
+            };
+            timer.schedule(enableCells, 3500);
             switchTurnTitle(game);
           } else if(game.getDeck().size()==0){ // game end
             removeCardByPatterns(pairedPatterns);

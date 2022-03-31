@@ -66,6 +66,7 @@ public class Card {
       node.setStyle(null);
       node.getStyleClass().clear();
       node.getStyleClass().add("card-back");
+      node.getStyleClass().add("button");
       node.setDisable(false);
     }else{
       setFront(true);
