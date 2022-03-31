@@ -5,6 +5,9 @@ import static javafx.application.Platform.exit;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -49,15 +52,38 @@ public class Controller implements Initializable {
       currentCard.getCardFXML().setOnAction(new EventHandler<ActionEvent>() {
         @Override public void handle(ActionEvent actionEvent) {
           currentCard.flip((Node)actionEvent.getSource());
-
           // check if pair was made
           String pairCardPattern = game.checkPair(actionEvent);
           ArrayList<String> pairedPatterns = game.getPairPatterns();
           if(pairCardPattern.equals("fail")){ // fail making pair
             if(game.getPairPatterns().size()!=0){ // when failed after second try
-              removeCardByPatterns(pairedPatterns);
+
+              // delay timing for turning back failed pair
+              // https://java.tutorialink.com/how-do-i-put-something-on-an-fx-thread
+              // https://stackoverflow.com/questions/21083945/how-to-avoid-not-on-fx-application-thread-currentthread-javafx-application-th
+              // https://www.demo2s.com/java/javafx-platform-runlater-runnable-runnable.html
+              // https://www.bold.ne.jp/engineer-club/java-thread
+
+              TimerTask turnBack = new TimerTask() {
+                public void run() {
+                  Platform.runLater(()-> {
+                    turnBackAllCards(game);
+                  });
+                }
+              };
+              TimerTask remove = new TimerTask() {
+                public void run() {
+                  Platform.runLater(()-> {
+                    removeCardByPatterns(pairedPatterns);
+                  });
+                }
+              };
+              Timer timer = new Timer();
+              timer.schedule(turnBack, 2000);
+              timer.schedule(remove, 3000);
+
             }
-            turnBackAllCards(game);
+
             switchTurnTitle(game);
           } else if(game.getDeck().size()==0){ // game end
             removeCardByPatterns(pairedPatterns);

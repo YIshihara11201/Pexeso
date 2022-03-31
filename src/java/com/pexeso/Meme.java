@@ -17,5 +17,4 @@ public class Meme {
     this.text = text;
   }
 
-
 }
