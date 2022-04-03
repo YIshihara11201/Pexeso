@@ -27,9 +27,8 @@ public class Controller implements Initializable {
   private static final double COL = 5;
 
   Player[] players = {
-      new Player("Cybill"),
-      new Player("David"),
-      new Player("Koki")
+          new Player("Cybill"),
+          new Player("David"),
   };
 
   @Override
@@ -51,7 +50,7 @@ public class Controller implements Initializable {
       // event setting for a card
       currentCard.getCardFXML().setOnAction(new EventHandler<ActionEvent>() {
         @Override public void handle(ActionEvent actionEvent) {
-          currentCard.flip((Node)actionEvent.getSource());
+          currentCard.flip(gridlayout, (Node)actionEvent.getSource());
           // check if pair was made
           String pairCardPattern = game.checkPair(actionEvent);
           ArrayList<String> pairedPatterns = game.getPairPatterns();
@@ -127,7 +126,7 @@ public class Controller implements Initializable {
       int removeCount = 0;
       for (int j = 1; j < children.size(); j++) {
         if (children.get(j) instanceof Button
-            && ((Button) children.get(j)).getText().equals(pattern)) {
+                && ((Button) children.get(j)).getText().equals(pattern)) {
           children.remove(children.get(j));
 
           // add invisible cards to keep space for the removed pair
@@ -156,7 +155,7 @@ public class Controller implements Initializable {
       if(currentCard.isFront()){
         for(Node node: cardNodes){
           if(!node.getId().equals("blank") && node.getId().equals(currentCard.getCardId())){
-            currentCard.flip(node);
+            currentCard.flip(gridlayout,node);
           }
         }
       }
