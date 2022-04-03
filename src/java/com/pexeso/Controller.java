@@ -27,8 +27,8 @@ public class Controller implements Initializable {
   private static final double COL = 5;
 
   Player[] players = {
-          new Player("Cybill"),
-          new Player("David"),
+      new Player("Cybill"),
+      new Player("David"),
   };
 
   @Override
