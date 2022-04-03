@@ -79,7 +79,7 @@ public class Card {
       node.getStyleClass().clear();
       node.getStyleClass().add("card-front");
       node.setStyle("-fx-background-image: url(" + getClass().getResource(getFrontPattern())
-          .toExternalForm() + ")");
+              .toExternalForm() + ")");
       node.setDisable(true);
     }
 

@@ -126,7 +126,7 @@ public class Controller implements Initializable {
       int removeCount = 0;
       for (int j = 1; j < children.size(); j++) {
         if (children.get(j) instanceof Button
-            && ((Button) children.get(j)).getText().equals(pattern)) {
+                && ((Button) children.get(j)).getText().equals(pattern)) {
           children.remove(children.get(j));
 
           // add invisible cards to keep space for the removed pair
