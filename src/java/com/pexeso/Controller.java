@@ -29,7 +29,6 @@ public class Controller implements Initializable {
   Player[] players = {
       new Player("Cybill"),
       new Player("David"),
-      new Player("Koki")
   };
 
   @Override
@@ -51,7 +50,7 @@ public class Controller implements Initializable {
       // event setting for a card
       currentCard.getCardFXML().setOnAction(new EventHandler<ActionEvent>() {
         @Override public void handle(ActionEvent actionEvent) {
-          currentCard.flip((Node)actionEvent.getSource());
+          currentCard.flip(gridlayout, (Node)actionEvent.getSource());
           // check if pair was made
           String pairCardPattern = game.checkPair(actionEvent);
           ArrayList<String> pairedPatterns = game.getPairPatterns();
@@ -156,7 +155,7 @@ public class Controller implements Initializable {
       if(currentCard.isFront()){
         for(Node node: cardNodes){
           if(!node.getId().equals("blank") && node.getId().equals(currentCard.getCardId())){
-            currentCard.flip(node);
+            currentCard.flip(gridlayout,node);
           }
         }
       }

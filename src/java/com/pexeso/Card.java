@@ -1,8 +1,15 @@
 package com.pexeso;
 
+import javafx.animation.TranslateTransition;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
+import javafx.animation.*;
 
 public class Card {
 
@@ -58,7 +65,7 @@ public class Card {
     isFront = front;
   }
 
-  public void flip(Node node) {
+  public void flip(GridPane grid, Node node) {
     // TODO
     // implement flipping animation
     if(isFront()){
@@ -66,7 +73,6 @@ public class Card {
       node.setStyle(null);
       node.getStyleClass().clear();
       node.getStyleClass().add("card-back");
-      node.getStyleClass().add("button");
       node.setDisable(false);
     }else{
       setFront(true);
@@ -76,5 +82,12 @@ public class Card {
           .toExternalForm() + ")");
       node.setDisable(true);
     }
+
+    RotateTransition rotator = new RotateTransition(Duration.seconds(0.4), node);
+    rotator.setAxis(Rotate.Y_AXIS);
+    rotator.setFromAngle(0);
+    rotator.setToAngle(360);
+    rotator.setInterpolator(Interpolator.LINEAR);
+    rotator.play();
   }
 }
