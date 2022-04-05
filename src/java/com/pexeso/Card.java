@@ -1,11 +1,7 @@
 package com.pexeso;
 
-import javafx.animation.TranslateTransition;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
@@ -16,7 +12,6 @@ public class Card {
   private String cardId;
   private String frontPattern;
   private boolean isFront;
-
   private Button cardFXML;
 
   public Card(String cardId, String frontPattern){
@@ -65,20 +60,19 @@ public class Card {
     isFront = front;
   }
 
-  public void flip(GridPane grid, Node node) {
+  public void flip(Node node) {
     // TODO
     // implement flipping animation
     if(isFront()){
       setFront(false);
       node.setStyle(null);
       node.getStyleClass().clear();
-      node.getStyleClass().add("btn");
+      node.getStyleClass().add("button");
       node.getStyleClass().add("card-back");
       node.setDisable(false);
     }else{
       setFront(true);
       node.getStyleClass().clear();
-      node.getStyleClass().add("btn");
       node.getStyleClass().add("card-front");
       node.setStyle("-fx-background-image: url(" + getClass().getResource(getFrontPattern())
               .toExternalForm() + ")");

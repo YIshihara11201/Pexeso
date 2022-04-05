@@ -1,59 +1,24 @@
 package com.pexeso;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-
 
 public class Game {
   private static final int CARD_PAIR = 15;
-  private static final int CARD_NUMBER = 2*CARD_PAIR;
-  private static final Card[] cards = {
-      new Card("1", "/com/pexeso/pictures/1.jpg"),
-      new Card("2", "/com/pexeso/pictures/1.jpg"),
-      new Card("3", "/com/pexeso/pictures/2.jpg"),
-      new Card("4", "/com/pexeso/pictures/2.jpg"),
-      new Card("5", "/com/pexeso/pictures/3.jpg"),
-      new Card("6", "/com/pexeso/pictures/3.jpg"),
-      new Card("7", "/com/pexeso/pictures/4.jpg"),
-      new Card("8", "/com/pexeso/pictures/4.jpg"),
-      new Card("9", "/com/pexeso/pictures/5.jpg"),
-      new Card("10", "/com/pexeso/pictures/5.jpg"),
-      new Card("11", "/com/pexeso/pictures/6.jpg"),
-      new Card("12", "/com/pexeso/pictures/6.jpg"),
-      new Card("13", "/com/pexeso/pictures/7.jpg"),
-      new Card("14", "/com/pexeso/pictures/7.jpg"),
-      new Card("15", "/com/pexeso/pictures/8.jpg"),
-      new Card("16", "/com/pexeso/pictures/8.jpg"),
-      new Card("17", "/com/pexeso/pictures/9.jpg"),
-      new Card("18", "/com/pexeso/pictures/9.jpg"),
-      new Card("19", "/com/pexeso/pictures/10.jpg"),
-      new Card("20", "/com/pexeso/pictures/10.jpg"),
-      new Card("21", "/com/pexeso/pictures/11.jpg"),
-      new Card("22", "/com/pexeso/pictures/11.jpg"),
-      new Card("23", "/com/pexeso/pictures/12.jpg"),
-      new Card("24", "/com/pexeso/pictures/12.jpg"),
-      new Card("25", "/com/pexeso/pictures/13.jpg"),
-      new Card("26", "/com/pexeso/pictures/13.jpg"),
-      new Card("27", "/com/pexeso/pictures/14.jpg"),
-      new Card("28", "/com/pexeso/pictures/14.jpg"),
-      new Card("29", "/com/pexeso/pictures/15.jpg"),
-      new Card("30", "/com/pexeso/pictures/15.jpg"),
-  };
 
-  private ArrayList<Card> deck;
+  private ArrayList<Card> deck = new ArrayList<>();
   private Player[] players;
   private int turn;
   private Card[] drawCards = new Card[2];
   private ArrayList<String> pairPatterns = new ArrayList<>();
 
-  public Game(Player[] players) {
-    createDeck(cards);
-    setPlayers(players);
+  public Game() {
+    createDeck();
+    setPlayers(new Player[]{
+        new Player("PLayer1"),
+        new Player("Player2"),
+    });
     setTurn(0);
   }
 
@@ -81,8 +46,10 @@ public class Game {
     return pairPatterns;
   }
 
-  private void createDeck(Card[] card) {
-    this.deck = new ArrayList<>(List.of(cards));
+  private void createDeck() {
+    for (int i=0; i<CARD_PAIR*2; i++){
+      this.deck.add(new Card(String.valueOf(i+1), String.format("/com/pexeso/pictures/%d.jpg", (i/2)+1)));
+    }
   }
 
   public Card findCard(String pattern){
@@ -135,5 +102,4 @@ public class Game {
     // for 1st draw
     return "first-draw";
   }
-
 }
