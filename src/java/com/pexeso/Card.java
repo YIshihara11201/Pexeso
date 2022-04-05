@@ -72,11 +72,13 @@ public class Card {
       setFront(false);
       node.setStyle(null);
       node.getStyleClass().clear();
+      node.getStyleClass().add("btn");
       node.getStyleClass().add("card-back");
       node.setDisable(false);
     }else{
       setFront(true);
       node.getStyleClass().clear();
+      node.getStyleClass().add("btn");
       node.getStyleClass().add("card-front");
       node.setStyle("-fx-background-image: url(" + getClass().getResource(getFrontPattern())
               .toExternalForm() + ")");
