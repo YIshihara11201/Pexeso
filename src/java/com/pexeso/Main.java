@@ -1,6 +1,7 @@
 package com.pexeso;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,6 +20,8 @@ public class Main extends Application{
     // primaryStage -> outermost window
     // boardScene -> properties of the window
     primaryStage.setTitle("Pexeso");
+    primaryStage.setOnCloseRequest(e -> Platform.exit());
+    
     Scene boardScene = new Scene(stackPane, 800,800);
 
     boardScene.getStylesheets().add(getClass().getResource("/com/pexeso/css/styles.css").toExternalForm()); // adding css to the sceneadding css to the scene

@@ -48,13 +48,14 @@ public class Game {
 
   private void createDeck() {
     for (int i=0; i<CARD_PAIR*2; i++){
-        this.deck.add(new Card(String.valueOf(i+1), String.format("/com/pexeso/pictures/%d.jpg", (i/2)+1)));
+      String imagePath = String.format("/com/pexeso/pictures/%d.jpg", (i/2)+1);
+      this.deck.add(new Card(String.valueOf(i+1), new Meme(imagePath, imagePath)));
     }
   }
 
-  public Card findCard(String pattern){
+  public Card findCard(String id){
     for(Card card: deck){
-      if(card.getCardId().equals(pattern)){
+      if(card.getCardId().equals(id)){
         return card;
       }
     }
@@ -63,16 +64,16 @@ public class Game {
 
   public String checkPair(ActionEvent actionEvent){
     Button clickedCard = (Button)actionEvent.getSource();
-    String clickedCardPattern = clickedCard.getId();
+    String clickedCardId = clickedCard.getId();
 
     if(drawCards[0]==null){  // 1st draw
-      drawCards[0] = findCard(clickedCardPattern);
+      drawCards[0] = findCard(clickedCardId);
     }else if(drawCards[1]==null){  // 2nd draw
-      drawCards[1] = findCard(clickedCardPattern);
+      drawCards[1] = findCard(clickedCardId);
       // check if pair was made
       // success
-      if(drawCards[0].getFrontPattern().equals(drawCards[1].getFrontPattern())){
-        String pairCardPattern = drawCards[0].getFrontPattern();
+      if(drawCards[0].getMeme().getPattern().equals(drawCards[1].getMeme().getPattern())){
+        String pairCardPattern = drawCards[0].getMeme().getPattern();
         // retain pair pattern until fail
         pairPatterns.add(pairCardPattern);
 

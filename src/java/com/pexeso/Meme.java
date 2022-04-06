@@ -1,20 +1,27 @@
 package com.pexeso;
 
 public class Meme {
+  private String pattern;
   private String text;
-//  private String designId;
 
-  public Meme(String text){
+  public Meme(String pattern, String text){
+    setPattern(pattern);
     setText(text);
-//    setDesignId(designId);
+  }
+
+  public String getPattern() {
+    return pattern;
+  }
+
+  public void setPattern(String pattern) {
+    this.pattern = pattern;
   }
 
   public String getText() {
     return text;
   }
 
-  private void setText(String text) {
+  public void setText(String text) {
     this.text = text;
   }
-
 }
