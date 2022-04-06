@@ -1,7 +1,6 @@
 package com.pexeso;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -16,10 +15,6 @@ import javafx.stage.Stage;
 public class PopupWindow {
 
     public static void display(Player[] players) {
-        // 1. Stage (window)
-        //    -> |Scene|
-        //        -> |Root| (Layout: GridPane, StackPane, HBox, VBox,...)
-        //            -> (Children) Nodes (Buttons, Labels, ...)
 
         Stage window = new Stage();
         // while this window is on the screen, you cannot interact with other windows.
@@ -40,7 +35,6 @@ public class PopupWindow {
             }else if(playerPoint==maxPoint){
                 winner.add(players[i]);
             }
-            System.out.println(winner);
         }
         // set popup window title
         if(winner.size()==1){
@@ -52,19 +46,17 @@ public class PopupWindow {
         // set popup window content
         StringBuilder message = new StringBuilder();
         for(Player player: players){
-            message.append(player.toString()).append("\n");
+            message.append(player.getName() + ":   " + player.getPoints().size()).append("\n");
         }
 
         messageLabel.setText(message.toString());
-        messageLabel.setStyle("-fx-text-fill: blue; -fx-font-size: 20;");
-
+        messageLabel.setStyle("-fx-text-fill: black; -fx-font-size: 20;");
 
         Button okButton = new Button();
         okButton.setText("OK");
         okButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                // close the window!
                 window.close();
             }
         });
@@ -73,11 +65,9 @@ public class PopupWindow {
         layout.getChildren().add(okButton);
         layout.setAlignment(Pos.CENTER);
 
-
         Scene scene = new Scene(layout, 300, 300);
         scene.getStylesheets().add(PopupWindow.class.getResource("/com/pexeso/css/styles.css").toExternalForm());
         window.setScene(scene);
         window.showAndWait();
-
     }
 }

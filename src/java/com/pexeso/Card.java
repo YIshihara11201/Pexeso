@@ -1,11 +1,7 @@
 package com.pexeso;
 
-import javafx.animation.TranslateTransition;
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
@@ -14,21 +10,20 @@ import javafx.animation.*;
 public class Card {
 
   private String cardId;
-  private String frontPattern;
+  private Meme meme;
   private boolean isFront;
-
   private Button cardFXML;
 
-  public Card(String cardId, String frontPattern){
+  public Card(String cardId, Meme meme){
     setCardId(cardId);
-    setFrontPattern(frontPattern);
+    setMeme(meme);
     setFront(false);
 
     // FXML setting
     Button card = new Button();
     card.getStyleClass().add("card-back");
     card.setId(cardId);
-    card.setText(frontPattern);
+    card.setText(getMeme().getText());
     card.setFont(new Font(0));
     setCardFXML(card);
   }
@@ -49,12 +44,12 @@ public class Card {
     this.cardId = cardId;
   }
 
-  public String getFrontPattern() {
-    return frontPattern;
+  public Meme getMeme() {
+    return meme;
   }
 
-  public void setFrontPattern(String frontPattern) {
-    this.frontPattern = frontPattern;
+  public void setMeme(Meme meme) {
+    this.meme = meme;
   }
 
   public boolean isFront() {
@@ -65,25 +60,26 @@ public class Card {
     isFront = front;
   }
 
-  public void flip(GridPane grid, Node node) {
+  public void flip(Node cardElem) {
     // TODO
     // implement flipping animation
     if(isFront()){
       setFront(false);
-      node.setStyle(null);
-      node.getStyleClass().clear();
-      node.getStyleClass().add("card-back");
-      node.setDisable(false);
+      cardElem.setStyle(null);
+      cardElem.getStyleClass().clear();
+      cardElem.getStyleClass().add("button");
+      cardElem.getStyleClass().add("card-back");
+      cardElem.setDisable(false);
     }else{
       setFront(true);
-      node.getStyleClass().clear();
-      node.getStyleClass().add("card-front");
-      node.setStyle("-fx-background-image: url(" + getClass().getResource(getFrontPattern())
-              .toExternalForm() + ")");
-      node.setDisable(true);
+      cardElem.getStyleClass().clear();
+      cardElem.getStyleClass().add("card-front");
+      cardElem.setStyle("-fx-background-image: url(" + getClass().getResource(getMeme().getPattern())
+          .toExternalForm() + ")");
+      cardElem.setDisable(true);
     }
 
-    RotateTransition rotator = new RotateTransition(Duration.seconds(0.4), node);
+    RotateTransition rotator = new RotateTransition(Duration.seconds(0.4), cardElem);
     rotator.setAxis(Rotate.Y_AXIS);
     rotator.setFromAngle(0);
     rotator.setToAngle(360);
