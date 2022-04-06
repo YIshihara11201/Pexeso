@@ -14,10 +14,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Font;
 
 public class Controller implements Initializable {
   @FXML
@@ -27,13 +30,16 @@ public class Controller implements Initializable {
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
+//    gridlayout.setGridLinesVisible(true);
     Game game = new Game();
 
     // initialize turn label
     Label turnLabel = new Label();
     turnLabel.setText(game.getPlayers()[game.getTurn()].getName()+"'s turn");
-    turnLabel.setId("turn");
+    turnLabel.setId("turn-label");
     GridPane.setRowIndex(turnLabel, 0);
+    GridPane.setColumnSpan(turnLabel, 5);
+    GridPane.setHalignment(turnLabel, HPos.CENTER);
     gridlayout.getChildren().add(turnLabel);
 
     // set cards on the field
@@ -88,12 +94,12 @@ public class Controller implements Initializable {
                 Platform.runLater(()-> {
                   gridlayout.getChildren().forEach(node->{
                     node.setDisable(false);
+                    switchTurnTitle(game);
                   });
                 });
               }
             };
             timer.schedule(enableCells, 3500);
-            switchTurnTitle(game);
           } else if(game.getDeck().size()==0){ // game end
             Timer timer = new Timer();
             TimerTask removeCards = new TimerTask() {
@@ -119,14 +125,14 @@ public class Controller implements Initializable {
 
       // set card FXML inside GridPane (parent grid)
       // shift 1 row for placing player's turn label
-      GridPane.setRowIndex(currentCard.getCardFXML(), (int) (1+i/COL));
+      GridPane.setRowIndex(currentCard.getCardFXML(), (int)(1+i/COL));
       GridPane.setColumnIndex(currentCard.getCardFXML(), (int)(i%COL));
       gridlayout.getChildren().add(currentCard.getCardFXML());
     }
   }
 
   private void switchTurnTitle(Game game) {
-    Label label = (Label) gridlayout.lookup("#turn");
+    Label label = (Label) gridlayout.lookup("#turn-label");
     label.setText(game.getPlayers()[game.getTurn()].getName() + "'s turn");
   }
 

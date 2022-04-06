@@ -25,3 +25,9 @@
     -fx-margin: 0;
     -fx-alignment: center ;
 }
+
+#turn-label {
+   -fx-padding: 10;
+   -fx-alignment: center;
+   -fx-font-size: 20;
+}

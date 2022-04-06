@@ -16,8 +16,8 @@ public class Game {
   public Game() {
     createDeck();
     setPlayers(new Player[]{
-        new Player("PLayer1"),
-        new Player("Player2"),
+        new Player("PLayer 1"),
+        new Player("Player 2"),
     });
     setTurn(0);
   }
@@ -48,7 +48,7 @@ public class Game {
 
   private void createDeck() {
     for (int i=0; i<CARD_PAIR*2; i++){
-      this.deck.add(new Card(String.valueOf(i+1), String.format("/com/pexeso/pictures/%d.jpg", (i/2)+1)));
+        this.deck.add(new Card(String.valueOf(i+1), String.format("/com/pexeso/pictures/%d.jpg", (i/2)+1)));
     }
   }
 
