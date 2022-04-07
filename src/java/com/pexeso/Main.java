@@ -21,8 +21,9 @@ public class Main extends Application{
     // boardScene -> properties of the window
     primaryStage.setTitle("Pexeso");
     primaryStage.setOnCloseRequest(e -> Platform.exit());
-    
-    Scene boardScene = new Scene(stackPane, 800,800);
+
+    // playBoard size
+    Scene boardScene = new Scene(stackPane, 1512,980);
 
     boardScene.getStylesheets().add(getClass().getResource("/com/pexeso/css/styles.css").toExternalForm()); // adding css to the sceneadding css to the scene
     primaryStage.setScene(boardScene);
@@ -32,3 +33,4 @@ public class Main extends Application{
     launch(args);
   }
 }
+

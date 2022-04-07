@@ -1,6 +1,11 @@
+#gridlayout {
+  -fx-background-image: url("../pictures/playboard3.jpg");
+  -fx-background-size: contain;
+}
+
 .transparent-card {
-    -fx-pref-height: 100px;
-    -fx-pref-width: 100px;
+    -fx-pref-height: 125px;
+    -fx-pref-width: 125px;
     -fx-padding: 0;
     -fx-margin: 0;
     -fx-alignment: center ;
@@ -8,9 +13,9 @@
 }
 
 .card-front {
-    -fx-background-size: 100px 100px;
-    -fx-pref-height: 100px;
-    -fx-pref-width: 100px;
+    -fx-background-size: 125px 125px;
+    -fx-pref-height: 125px;
+    -fx-pref-width: 125px;
     -fx-padding: 0;
     -fx-margin: 0;
     -fx-alignment: center;
@@ -18,15 +23,16 @@
 
 .card-back {
     -fx-background-image: url("../pictures/back.jpg");
-    -fx-background-size: 100px 100px;
-    -fx-pref-height: 100px;
-    -fx-pref-width: 100px;
+    -fx-background-size: 125px 125px;
+    -fx-pref-height: 125px;
+    -fx-pref-width: 125px;
     -fx-padding: 0;
     -fx-margin: 0;
     -fx-alignment: center ;
 }
 
 #turn-label {
+
    -fx-padding: 10;
    -fx-alignment: center;
    -fx-font-size: 20;

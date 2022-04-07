@@ -2,7 +2,7 @@ package com.pexeso;
 
 import java.util.ArrayList;
 
-public class Player {
+public class  Player {
   private String name;
   private ArrayList<Card> points;
 
