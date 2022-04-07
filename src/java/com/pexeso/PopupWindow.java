@@ -69,5 +69,5 @@ public class PopupWindow {
         scene.getStylesheets().add(PopupWindow.class.getResource("/com/pexeso/css/styles.css").toExternalForm());
         window.setScene(scene);
         window.showAndWait();
-    }l
+    }
 }
