@@ -4,8 +4,8 @@
 }
 
 .transparent-card {
-    -fx-pref-height: 125px;
-    -fx-pref-width: 125px;
+    -fx-pref-height: 110px;
+    -fx-pref-width: 110px;
     -fx-padding: 0;
     -fx-margin: 0;
     -fx-alignment: center ;
@@ -13,9 +13,9 @@
 }
 
 .card-front {
-    -fx-background-size: 125px 125px;
-    -fx-pref-height: 125px;
-    -fx-pref-width: 125px;
+    -fx-background-size: 110px 110px;
+    -fx-pref-height: 110px;
+    -fx-pref-width: 110px;
     -fx-padding: 0;
     -fx-margin: 0;
     -fx-alignment: center;
@@ -23,16 +23,15 @@
 
 .card-back {
     -fx-background-image: url("../pictures/back.jpg");
-    -fx-background-size: 125px 125px;
-    -fx-pref-height: 125px;
-    -fx-pref-width: 125px;
+    -fx-background-size: 110px 110px;
+    -fx-pref-height: 110px;
+    -fx-pref-width: 110px;
     -fx-padding: 0;
     -fx-margin: 0;
     -fx-alignment: center ;
 }
 
 #turn-label {
-
    -fx-padding: 10;
    -fx-alignment: center;
    -fx-font-size: 20;
