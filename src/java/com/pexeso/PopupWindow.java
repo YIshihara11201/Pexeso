@@ -65,9 +65,9 @@ public class PopupWindow {
         layout.getChildren().add(okButton);
         layout.setAlignment(Pos.CENTER);
 
-        Scene scene = new Scene(layout, 800, 800);
+        Scene scene = new Scene(layout, 500, 500);
         scene.getStylesheets().add(PopupWindow.class.getResource("/com/pexeso/css/styles.css").toExternalForm());
         window.setScene(scene);
         window.showAndWait();
-    }
+    }l
 }
