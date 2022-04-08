@@ -16,7 +16,7 @@ public class Game {
   public Game() {
     createDeck();
     setPlayers(new Player[]{
-        new Player("PLayer 1"),
+        new Player("Player 1"),
         new Player("Player 2"),
     });
     setTurn(0);
